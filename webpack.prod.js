@@ -11,11 +11,12 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json']
     },
     entry: {
-        app:path.join(__dirname, 'src/')+'index.js'
+        app:path.join(__dirname, 'src', 'index.js')
     },
     output: {
-        filename: '[name].js',
-        path: path.join(__dirname, 'dist/')
+        filename: 'assets/[name].js',
+        path: path.join(__dirname, 'dist'),
+        publicPath:'/'
     },
     module: {
         rules: [
@@ -32,12 +33,17 @@ module.exports = {
     },
     plugins: [
         new BabiliPlugin(),
-        new ExtractTextPlugin("index.css"), // pack all the sass and css files into index.csss
+        new ExtractTextPlugin("assets/index.css"), // pack all the sass and css files into index.csss
         new HtmlWebpackPlugin({
             title: 'Webpack demo',
             template:'./src/index.html'
-        })
-        ,new webpack.DllReferencePlugin({
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./dist/manifest.json')
         })

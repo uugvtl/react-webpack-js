@@ -5,21 +5,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     devServer: {
         contentBase:path.join(__dirname,'dist'),
+        publicPath:'/',
         compress:true,
         port:3000,
         hot: true
     },
     devtool:"source-map",
     resolve: {
-        // 现在你import文件的时候可以直接使用import Func from './file'，不用再使用import Func from './file.js'
         extensions: ['.js', '.jsx', '.json']
     },
     entry: {
-        app:path.join(__dirname, 'src/')+'index.js'
+        app:path.join(__dirname, 'src', 'index.js')
     },
     output: {
-        filename: '[name].js',
-        path: path.join(__dirname, 'dist/')
+        filename: 'assets/[name].js',
+        path: path.join(__dirname, 'dist'),
+        publicPath:'/'
     },
     module: {
         rules: [
