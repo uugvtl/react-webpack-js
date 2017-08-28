@@ -4,32 +4,18 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BabiliPlugin = require("babili-webpack-plugin");
 
-const PATHS = {
-    src :path.join(__dirname, 'src/'),
-    dist:path.join(__dirname, 'dist/')
-};
 
 module.exports = {
-    devtool:"cheap-module-eval-source-map",
+    devtool:"source-map",
     entry: {
-        app:PATHS.src+'index.js'
+        app:path.join(__dirname, 'src/')+'index.js'
     },
     output: {
-        filename: '[name].[chunkHash:6].js',
-        path: PATHS.dist
+        filename: '[name].js',
+        path: path.join(__dirname, 'dist/')
     },
     module: {
         rules: [
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                exclude: /node_modules/,
-                options: {
-                    loaders: {
-                        scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
-                    }
-                }
-            },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -39,8 +25,7 @@ module.exports = {
                 }
             },
             {
-                test:/.scss$/,
-                exclude: /node_modules/,
+                test: /\.scss$/,
                 use:['style-loader','css-loader','sass-loader']
             }
         ]

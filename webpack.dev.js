@@ -3,11 +3,6 @@ const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const PATHS = {
-    src :path.join(__dirname, 'src/'),
-    dist:path.join(__dirname, 'dist/')
-};
-
 module.exports = {
     devServer: {
         contentBase:path.join(__dirname,'dist'),
@@ -17,26 +12,16 @@ module.exports = {
     },
     devtool:"source-map",
     entry: {
-        app:PATHS.src+'index.js'
+        app:path.join(__dirname, 'src/')+'index.js'
     },
     output: {
         filename: '[name].js',
-        path: PATHS.dist
+        path: path.join(__dirname, 'dist/')
     },
     module: {
         rules: [
             {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                exclude: /node_modules/,
-                options: {
-                    loaders: {
-                        scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
-                    }
-                }
-            },
-            {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
@@ -44,8 +29,7 @@ module.exports = {
                 }
             },
             {
-                test:/.scss$/,
-                exclude: /node_modules/,
+                test: /\.scss$/,
                 use:['style-loader','css-loader','sass-loader']
             }
         ]

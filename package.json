@@ -1,5 +1,5 @@
 {
-  "name": "vue-webpack-js",
+  "name": "react-webpack-js",
   "version": "1.0.0",
   "description": "vue webpack ts",
   "main": "index.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uugvtl/vue-webpack-js.git"
+    "url": "git+https://github.com/uugvtl/react-webpack-js.git"
   },
   "keywords": [
     "vue",
@@ -24,9 +24,9 @@
   "author": "leon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/uugvtl/vue-webpack-js/issues"
+    "url": "https://github.com/uugvtl/react-webpack-js/issues"
   },
-  "homepage": "https://github.com/uugvtl/vue-webpack-js#readme",
+  "homepage": "https://github.com/uugvtl/react-webpack-js#readme",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.26.0",
@@ -43,6 +43,7 @@
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.5.3",
+    "react-hot-loader": "^1.3.1",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",
@@ -53,6 +54,7 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "ajv": "^5.2.2",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
