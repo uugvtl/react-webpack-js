@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
     devServer: {
         contentBase:path.join(__dirname,'dist'),
@@ -11,6 +10,10 @@ module.exports = {
         hot: true
     },
     devtool:"source-map",
+    resolve: {
+        // 现在你import文件的时候可以直接使用import Func from './file'，不用再使用import Func from './file.js'
+        extensions: ['.js', '.jsx', '.json']
+    },
     entry: {
         app:path.join(__dirname, 'src/')+'index.js'
     },
@@ -21,16 +24,14 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                loader: 'babel-loader',
+                test: /\.jsx?$/, // test 去判断是否为.js或.jsx,是的话就是进行es6和jsx的编译
                 exclude: /node_modules/,
-                query: {
-                    presets: ['stage-2']
-                }
+                loaders:['react-hot-loader','babel-loader']
             },
             {
-                test: /\.scss$/,
-                use:['style-loader','css-loader','sass-loader']
+                test: /\.(scss|sass|css)$/,  // pack sass and css files
+                exclude: /node_modules/,
+                use:['style-loader','css-loader', 'postcss-loader','sass-loader']
             }
         ]
     },
