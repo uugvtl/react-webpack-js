@@ -11,7 +11,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json']
     },
     entry: {
-        app:[path.join(__dirname, 'src', 'index.js')]
+        app:["promise-polyfill","whatwg-fetch","babel-polyfill",path.join(__dirname, 'src', 'index.js')]
     },
     output: {
         filename: 'assets/[name].js',

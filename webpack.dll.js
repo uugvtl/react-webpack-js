@@ -8,8 +8,7 @@ const vendors = [
     'react-dom',
     'redux',
     'react-redux',
-    'rx-react-container',
-    'babel-polyfill'
+    'rx-react-container'
 ];
 
 module.exports = {
