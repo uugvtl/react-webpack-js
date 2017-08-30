@@ -33,18 +33,23 @@ module.exports = {
                 test: /\.(scss|sass|css)$/,  // pack sass and css files
                 exclude: /node_modules/,
                 use:['style-loader','css-loader', 'postcss-loader','sass-loader']
+            },
+            {
+                test: /\.pug$/, // test 去判断是否为.js或.jsx,是的话就是进行es6和jsx的编译
+                exclude: /node_modules/,
+                loader:'pug-loader'
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Webpack demo',
-            template:'./src/index.html'
+            template:'./src/index.pug'
         })
         ,new webpack.HotModuleReplacementPlugin()
         ,new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require('./dist/manifest.json')
+            manifest: require('./dist/assets/manifest.json')
         })
     ]
 };

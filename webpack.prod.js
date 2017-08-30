@@ -28,6 +28,11 @@ module.exports = {
             {
                 test: /\.(scss|sass|css)$/,  // pack sass and css files
                 loader: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader!postcss-loader!sass-loader"})
+            },
+            {
+                test: /\.pug$/, // test 去判断是否为.js或.jsx,是的话就是进行es6和jsx的编译
+                exclude: /node_modules/,
+                loader:'pug-loader'
             }
         ]
     },
@@ -36,7 +41,7 @@ module.exports = {
         new ExtractTextPlugin("assets/index.css"), // pack all the sass and css files into index.csss
         new HtmlWebpackPlugin({
             title: 'Webpack demo',
-            template:'./src/index.html'
+            template:'./src/index.pug'
         }),
         new webpack.DefinePlugin({
             'process.env': {
@@ -45,7 +50,7 @@ module.exports = {
         }),
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require('./dist/manifest.json')
+            manifest: require('./dist/assets/manifest.json')
         })
     ]
 };

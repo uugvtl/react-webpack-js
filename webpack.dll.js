@@ -6,6 +6,8 @@ const vendors = [
     'rxjs',
     'react',
     'react-dom',
+    'redux',
+    'react-redux',
     'rx-react-container',
     'babel-polyfill'
 ];
@@ -15,13 +17,14 @@ module.exports = {
         vendor: vendors
     },
     output: {
-        path: path.join(__dirname, "dist"),
+        path: path.join(__dirname, "dist",'assets'),
         filename: "libs.js",
-        library: "[name]_[hash]"
+        library: "[name]_[hash]",
+        publicPath: "/"
     },
     plugins: [
         new webpack.DllPlugin({
-            path: path.join(__dirname, "dist", "manifest.json"),
+            path: path.join(__dirname, "dist", 'assets',"manifest.json"),
             name: "[name]_[hash]",
             context: __dirname
         })
