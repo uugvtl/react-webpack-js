@@ -15,7 +15,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json']
     },
     entry: {
-        app:path.join(__dirname, 'src', 'index.js')
+        app:['babel-polyfill',path.join(__dirname, 'src', 'index.js')]
     },
     output: {
         filename: 'assets/[name].js',
