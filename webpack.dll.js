@@ -6,7 +6,8 @@ const vendors = [
     'rxjs',
     'react',
     'react-dom',
-    'rx-react-container'
+    'rx-react-container',
+    'babel-polyfill'
 ];
 
 module.exports = {
