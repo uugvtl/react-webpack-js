@@ -8,7 +8,12 @@ const vendors = [
     'react-dom',
     'redux',
     'react-redux',
-    'rx-react-container'
+    'rx-react-container',
+    'js-cookie',
+    'nprogress',
+    'promise-polyfill',
+    'axios',
+    'babel-polyfill'
 ];
 
 module.exports = {

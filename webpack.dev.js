@@ -1,29 +1,21 @@
 const path = require('path');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const baseWebpackConfig = require('./webpack.base');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-module.exports = {
+
+module.exports = merge(baseWebpackConfig, {
+    devtool:"source-map",
     devServer: {
         contentBase:path.join(__dirname,'dist'),
-        publicPath:'/',
+        publicPath: '/',
         compress:true,
         port:3000,
         hot: true
     },
-    devtool:"source-map",
-    resolve: {
-        extensions: ['.js', '.jsx', '.json']
-    },
-    entry: {
-        app:["promise-polyfill","whatwg-fetch","babel-polyfill",path.join(__dirname, 'src', 'index.js')]
-    },
-    output: {
-        filename: 'assets/[name].js',
-        path: path.join(__dirname, 'dist'),
-        publicPath:'/'
-    },
-    module: {
-        rules: [
+    module:{
+        rules:[
             {
                 test: /\.jsx?$/, // test 去判断是否为.js或.jsx,是的话就是进行es6和jsx的编译
                 exclude: /node_modules/,
@@ -32,26 +24,15 @@ module.exports = {
             {
                 test: /\.(scss|sass|css)$/,  // pack sass and css files
                 exclude: /node_modules/,
-                use:['style-loader','css-loader', 'postcss-loader','sass-loader']
-            },
-            {
-                test: /\.pug$/, // test 去判断是否为.js或.jsx,是的话就是进行es6和jsx的编译
-                exclude: /node_modules/,
-                loader:'pug-loader'
+                loaders:['style-loader','css-loader', 'postcss-loader','sass-loader']
             }
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Webpack demo',
-            template:'./src/index.pug'
-        })
-        ,new webpack.HotModuleReplacementPlugin()
-        ,new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('./dist/assets/manifest.json')
-        })
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new FriendlyErrorsPlugin()
     ]
-};
 
+});
 
