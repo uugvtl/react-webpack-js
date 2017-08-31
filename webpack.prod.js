@@ -28,6 +28,12 @@ module.exports = merge(baseWebpackConfig, {
                         },
                         {
                             loader: "postcss-loader",
+                            options: {
+                                config: {
+                                    path: './postcss.config.js'
+                                }
+                            }
+
                         },
                         {
                             loader: "sass-loader",
