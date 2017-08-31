@@ -58,10 +58,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Webpack demo',
             template:'./src/index.pug'
-        })
-        ,new webpack.DllReferencePlugin({
+        }),new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./dist/assets/manifest.json')
+        }),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: require( './postcss.config.js')
+            },
         })
     ]
 };

@@ -24,7 +24,24 @@ module.exports = merge(baseWebpackConfig, {
             {
                 test: /\.(scss|sass|css)$/,  // pack sass and css files
                 exclude: /node_modules/,
-                loaders:['style-loader','css-loader', 'postcss-loader','sass-loader']
+                use: [
+                    {
+                        loader:'style-loader'
+
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true
+                        }
+                    },
+                    {
+                        loader: "postcss-loader",
+                    },
+                    {
+                        loader: "sass-loader",
+                    }
+                ]
             }
         ]
     },

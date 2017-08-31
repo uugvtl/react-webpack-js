@@ -17,7 +17,23 @@ module.exports = merge(baseWebpackConfig, {
             },
             {
                 test: /\.(scss|sass|css)$/,  // pack sass and css files
-                loader: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader!postcss-loader!sass-loader"})
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: "css-loader",
+                            options: {
+                                modules: true
+                            }
+                        },
+                        {
+                            loader: "postcss-loader",
+                        },
+                        {
+                            loader: "sass-loader",
+                        }
+                    ]
+                })
             }
         ]
     },
@@ -30,6 +46,8 @@ module.exports = merge(baseWebpackConfig, {
             }
         }),
         new OptimizeCSSPlugin({
+            assetNameRegExp: /\.css/g,
+            cssProcessor: require('cssnano'),
             cssProcessorOptions: {
                 safe: true
             }
