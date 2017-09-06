@@ -1,17 +1,20 @@
 const path = require('path');
 const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 function resolve (dir) {
-    return path.join(__dirname, '..', dir)
+    return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
+    devtool:"source-map",
     resolve: {
         extensions: ['.js', '.jsx', '.json']
     },
     entry: {
-        app:[path.join(__dirname, 'src', 'index.js')]
+        app:[path.join(__dirname, 'src', 'index.jsx')]
     },
     output: {
         filename: 'assets/[name].js',
@@ -20,6 +23,32 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.(scss|sass|css)$/,  // pack sass and css files
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use:[
+                        {
+                            loader:'css-loader',
+                            options: {
+                                modules: true
+                            }
+                        },
+                        {
+                            loader:'postcss-loader',
+                            options: {
+                                modules: true
+                            }
+                        },
+                        {
+                            loader:'sass-loader',
+                            options: {
+                                modules: true
+                            }
+                        }
+                    ]
+                })
+            },
             {
                 test: /\.pug$/,
                 exclude: /node_modules/,
@@ -55,17 +84,19 @@ module.exports = {
         ]
     },
     plugins: [
+        new ExtractTextPlugin("assets/styles/index.css"), // pack all the sass and css files into index.csss
         new HtmlWebpackPlugin({
             title: 'Webpack demo',
             template:'./src/index.pug'
-        }),new webpack.DllReferencePlugin({
+        }),
+        new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./dist/assets/manifest.json')
         }),
         new webpack.LoaderOptionsPlugin({
             options: {
                 postcss: require( './postcss.config.js')
-            },
+            }
         })
     ]
 };
