@@ -5,6 +5,5 @@ export class Foo extends React.Component {
         return (
             <h1>Foo Leon</h1>
         );
-
     }
 }

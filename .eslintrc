@@ -1,0 +1,29 @@
+{
+//  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    // Disable for __DEV__, __SERVER__ usage.
+    "no-undef": 0,
+//    "no-unused-vars":0,
+    //Disable for console/alert
+    "no-console": 0,
+    "no-alert":0,
+    "semi": [2, "always"],//语句强制分号结尾
+    "indent": [2, 4,{"SwitchCase":1}]
+  },
+  "plugins": ["jsx-a11y", "react", "import"],
+  "settings": {
+    "import/parser":"babel-eslint",
+    "import/resolve":{
+      "moduleDirectory":["node_modules","src"]
+    }
+  },
+  "globals": {
+    "__DEV__":true
+  }
+}

@@ -1,5 +1,5 @@
-const path = require("path"),
-    webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
 
 const vendors = [
     'lodash',
@@ -21,15 +21,15 @@ module.exports = {
         vendor: vendors
     },
     output: {
-        path: path.join(__dirname, "dist",'assets'),
-        filename: "libs.js",
-        library: "[name]_[hash]",
-        publicPath: "/"
+        path: path.join(__dirname, 'dist', 'assets'),
+        filename: 'libs.js',
+        library: '[name]_[hash]',
+        publicPath: '/'
     },
     plugins: [
         new webpack.DllPlugin({
-            path: path.join(__dirname, "dist", 'assets',"manifest.json"),
-            name: "[name]_[hash]",
+            path: path.join(__dirname, 'dist', 'assets','manifest.json'),
+            name: '[name]_[hash]',
             context: __dirname
         })
     ]

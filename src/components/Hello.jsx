@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the 'undefined' type.
-import {Foo} from "./Foo";
+import { Foo } from './Foo';
 
-export class Hello extends React.Component{
+export class Hello extends React.Component {
     render() {
         return (
             <div>
